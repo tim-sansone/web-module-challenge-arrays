@@ -92,8 +92,8 @@ function addFlavor(arr, flavor){
   return arr;
  }
 
- console.log(addFlavor(originalFlavors, 'Rainbow Sherbert'));
-
+ // console.log(addFlavor(originalFlavors, 'Rainbow Sherbert'));
+ 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Houston, we have a problem! There are now 32 flavors in the originalFlavors array! Your task is to remove an item from the end of the array. 
@@ -197,10 +197,32 @@ Use the getAverageWordLength function below to do the following:
   For example: getAverageWordLength(originalFlavors) should return a number between 0 and 3.     
 */
 
-function getAverageWordLength(/*code here*/){
-  /*code here*/
+// build function that counts spaces
+function wordCount(str) {
+  let count = 1
+  for(let i=0; i<str.length; i++)
+    if(str[i] === ' ') {
+      count = count + 1;
+    }
+    return count;
 }
 
+function getAverageWordLength(arr){
+  let total = 0;
+  for(let i=0; i<arr.length; i++) {
+    total = total + wordCount(arr[i]);
+  }
+  return total/arr.length;
+}
+
+/* function getAverageWordLength(arr){
+  for(let i=0; i<arr.length; i++) {
+    arr[i] = wordCount(arr[i]);
+  }
+  return arr;
+} */
+
+// console.log(getAverageWordLength(originalFlavors));
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪
 Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors 
@@ -214,93 +236,189 @@ Use the getRandomFlavors function and new arrays below to do the following:
   For example: getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors) might return ["Strawberry Cheesecake", "Eggnog,"..."Chocolate"].
 */
 
+// NEW DATA ARRAYS FOR STRETCH 2 ⬇️
+const newFlavors = [
+  "Date night",
+  "U.S.S Butterscotch (Stranger Things special)",
+  "Honey Almond",
+  "Mint Chocolate Chip",
+  "Chocolate",
+  "Oreo® Cookies'n Cream",
+  "Chocolate Chip",
+  "Pralines 'n Cream",
+  "Very Berry Strawberry",
+  "Chocolate Chip Cookie Dough",
+  "Old Fashioned Butter Pecan",
+  "Jamoca®",
+  "Jamoca® Almond Fudge",
+  "Reese's® Peanut Butter Cup",
+  "Rocky Road",
+  "Peanut Butter ’n Chocolate",
+  "Gold Medal Ribbon®",
+  "World Class® Chocolate",
+  "Cherries Jubilee",
+  "Chocolate Fudge",
+  "Daiquiri Ice",
+  "Rainbow Sherbet",
+  "Rainbow Swirl"
+] 
 
-function getRandomFlavors(/*code here*/){
-  /*code here*/
+const seasonalFlavors = [
+  "America's Birthday Cake",
+  "Baseball Nut®",
+  "Blueberry Cheesecake",
+  "Bourbon Street Pecan Pie",
+  "Brownie Bar Mashup",
+  "Cherry Cordial with Kisses",
+  "Chocolate Mousse Royale",
+  "French Vanilla",
+  "Eggnog",
+  "German Chocolate Cake",
+  "Icing on the Cake",
+  "Love Potion #31",
+  "New York Cheesecake",
+  "Nutty Coconut",
+  "Peppermint",
+  "Strawberry Cheesecake",
+  "Rock ’n Pop Swirl",
+  "Reese’s Peanut Butter Cup",
+  "Trick Oreo Treat",
+  "Winter White Chocolate",
+  "made with Snickers®",
+  "made with M&M's®",
+  "Heath®",
+  "Mango Tango"
+]
+
+const regionalFlavors = [
+  "Pink Bubblegum",
+  "Caramel Macchiato",
+  "York Peppermint Pattie",
+  "Cotton Candy",
+  "Orange Sherbet",
+  "Grape Ice",
+  "Watermelon Ice",
+  "Miami Vice Sorbet",
+  "Splish Splash®",
+  "Wild 'n Reckless Sherbet",
+  "Lemon Custard",
+  "Oregon Blackberry",
+  "Bananas ‘n Strawberries",
+  "Mississippi Mud",
+  "Rum Raisin",
+  "Creole Cream Cheese",
+  "Chocolate Almond",
+  "Fudge Brownie",
+  "Banana Nut",
+  "Black Walnut",
+  "Cotton Candy Crackle",
+  "Quarterback Crunch",
+  "Chocolate Chocolate Chip Cheesecake",
+  "Caramel 'n' Cookies"
+]
+
+// merge all 4 arrays
+// create random number generator 0 - arrays.length
+// get flavors by index number (randomly generated) and add them to new array
+// run this 31 times
+
+
+// function getRandomFlavors(arr1, arr2, arr3, arr4){
+//   let arrTotal = [];
+//   let newArr = [];
+//   arrTotal.push(...arr1, ...arr2, ...arr3, ...arr4);
+//   for(let i = 0; i < 31; i++) {
+//     newArr.push(arrTotal[Math.floor(Math.random()*arrTotal.length)]);
+//   }
+//   return newArr;
+// }
+
+function getRandomFlavors(arr1, arr2, arr3, arr4, num){
+  let arrTotal = [];
+  let newArr = [];
+  let newFlav = '';
+  arrTotal.push(...arr1, ...arr2, ...arr3, ...arr4);
+  for(let i = 0; i < num; i++) {
+    newFlav = arrTotal[Math.floor(Math.random()*arrTotal.length)];
+    if(newArr.includes(newFlav)){
+      i = i - 1;
+    } else {
+      newArr.push(newFlav);
+    }
+  }
+  return newArr;
 }
 
-// NEW DATA ARRAYS FOR STRETCH 2 ⬇️
-// const newFlavors = [
-//   "Date night",
-//   "U.S.S Butterscotch (Stranger Things special)",
-//   "Honey Almond",
-//   "Mint Chocolate Chip",
-//   "Chocolate",
-//   "Oreo® Cookies'n Cream",
-//   "Chocolate Chip",
-//   "Pralines 'n Cream",
-//   "Very Berry Strawberry",
-//   "Chocolate Chip Cookie Dough",
-//   "Old Fashioned Butter Pecan",
-//   "Jamoca®",
-//   "Jamoca® Almond Fudge",
-//   "Reese's® Peanut Butter Cup",
-//   "Rocky Road",
-//   "Peanut Butter ’n Chocolate",
-//   "Gold Medal Ribbon®",
-//   "World Class® Chocolate",
-//   "Cherries Jubilee",
-//   "Chocolate Fudge",
-//   "Daiquiri Ice",
-//   "Rainbow Sherbet",
-//   "Rainbow Swirl"
-// ] 
+console.log(getRandomFlavors(originalFlavors, newFlavors, seasonalFlavors, regionalFlavors, 31));
 
-// const seasonalFlavors = [
-//   "America's Birthday Cake",
-//   "Baseball Nut®",
-//   "Blueberry Cheesecake",
-//   "Bourbon Street Pecan Pie",
-//   "Brownie Bar Mashup",
-//   "Cherry Cordial with Kisses",
-//   "Chocolate Mousse Royale",
-//   "French Vanilla",
-//   "Eggnog",
-//   "German Chocolate Cake",
-//   "Icing on the Cake",
-//   "Love Potion #31",
-//   "New York Cheesecake",
-//   "Nutty Coconut",
-//   "Peppermint",
-//   "Strawberry Cheesecake",
-//   "Rock ’n Pop Swirl",
-//   "Reese’s Peanut Butter Cup",
-//   "Trick Oreo Treat",
-//   "Winter White Chocolate",
-//   "made with Snickers®",
-//   "made with M&M's®",
-//   "Heath®",
-//   "Mango Tango"
-// ]
-
-// const regionalFlavors = [
-//   "Pink Bubblegum",
-//   "Caramel Macchiato",
-//   "York Peppermint Pattie",
-//   "Cotton Candy",
-//   "Orange Sherbet",
-//   "Grape Ice",
-//   "Watermelon Ice",
-//   "Miami Vice Sorbet",
-//   "Splish Splash®",
+// Here's my new flavor lists!
+// [
+//   'York Peppermint Pattie',
+//   'Trick Oreo Treat',
+//   'Winter White Chocolate',
+//   'Jamoca® Almond Fudge',
+//   'Blueberry Cheesecake',
+//   'Chocolate',
+//   'Chocolate Almond',
+//   'U.S.S Butterscotch (Stranger Things special)',
+//   'Creole Cream Cheese',
+//   'Icing on the Cake',
+//   'Cherry Macaron',
+//   'Mint Chocolate Chip',
+//   'Eggnog',
+//   'Nutty Coconut',
+//   'Watermelon Ice',
+//   'Miami Vice Sorbet',
+//   'Chocolate Chip Cookie Dough',
+//   'Honey Almond',
+//   'made with Snickers®',
+//   'Quarterback Crunch',
+//   'Bourbon Street Pecan Pie',
+//   'Strawberry Cheesecake',
+//   'Chocolate Chocolate Chip Cheesecake',
+//   'Peppermint',
+//   'Maple Nut',
 //   "Wild 'n Reckless Sherbet",
-//   "Lemon Custard",
-//   "Oregon Blackberry",
-//   "Bananas ‘n Strawberries",
-//   "Mississippi Mud",
-//   "Rum Raisin",
-//   "Creole Cream Cheese",
-//   "Chocolate Almond",
-//   "Fudge Brownie",
-//   "Banana Nut",
-//   "Black Walnut",
-//   "Cotton Candy Crackle",
-//   "Quarterback Crunch",
-//   "Chocolate Chocolate Chip Cheesecake",
-//   "Caramel 'n' Cookies"
+//   'Orange Sherbet',
+//   'Heath®',
+//   'Black Walnut',
+//   'Mango Tango',
+//   'Chocolate Chip'
 // ]
 
 
+// ['Lemon Custard',
+// 'Black Walnut',
+// 'Eggnog',
+// 'Rainbow Swirl',
+// 'Trick Oreo Treat',
+// 'Creole Cream Cheese',
+// "America's Birthday Cake",
+// 'Maple Nut',
+// 'Coffee Candy',
+// 'Gold Medal Ribbon®',
+// 'Chocolate Fudge',
+// 'Bananas ‘n Strawberries',
+// 'Grape Ice',
+// 'Rocky Road',
+// 'Jamoca®',
+// 'Oregon Blackberry',
+// 'Heath®',
+// 'Chocolate Chip',
+// 'Chocolate',
+// 'Burgundy Cherry',
+// 'Baseball Nut®',
+// 'Strawberry',
+// 'Nutty Coconut',
+// 'Miami Vice Sorbet',
+// 'U.S.S Butterscotch (Stranger Things special)',
+// 'Coffee',
+// 'Very Berry Strawberry',
+// 'Rock ’n Pop Swirl',
+// 'Rainbow Sherbet',
+// 'Winter White Chocolate',
+// 'Blueberry Cheesecake'
+// ]
 
 /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
 function foo(){
